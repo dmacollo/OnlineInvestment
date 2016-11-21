@@ -1,23 +1,28 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
-<form action="<spring:url value="/membership/form"/>" method="get">
-	<input type="submit" value="New Applicant"/>
-</form>
+<security:authorize access="hasRole('ROLE_USER')">
+	<form action="<spring:url value="/membership/form"/>" method="get">
+		<input type="submit" value="New Applicant" />
+	</form>	
+	<form action="<spring:url value="/member/profile/1"/>" method="get">
+		<input type="submit" value="Profile" />
+	</form>
 
-<form action="<spring:url value="/member/profile/1"/>" method="get">
-	<input type="submit" value="Profile"/>
-</form>
+	<form action="<spring:url value="/member/capital/1"/>" method="get">
+		<input type="submit" value="Capital" />
+	</form>
+</security:authorize>
 
-<form action="<spring:url value="/member/capital/1"/>" method="get">
-	<input type="submit" value="Capital"/>
-</form>
+<security:authorize access="hasRole('ROLE_ADMIN')">
+	<form action="<spring:url value="/user/add"/>" method="get">
+		<input type="submit" value="User" />
+	</form>
 
+	<form action="<spring:url value="/staff/add"/>" method="get">
+		<input type="submit" value="Staff" />
+	</form>
+</security:authorize>
 
-<form action="<spring:url value="/user/add"/>" method="get">
-	<input type="submit" value="User"/>
-</form>
-
-<form action="<spring:url value="/staff/add"/>" method="get">
-	<input type="submit" value="Staff"/>
-</form>
