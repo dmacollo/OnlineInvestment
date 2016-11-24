@@ -3,21 +3,21 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<h3>Add New Staff</h3>
-<form:form modelAttribute="newStaff" method="post">
+<h3>Edit Staff</h3>
+<form:form modelAttribute="editStaff" method="post">
 	<table>
 		<tr>
 			<td>FirstName <spring:message code="staff.firstName" text="" />
 				:
 			</td>
-			<td><form:input path="firstName" type="text" value="${newStaff.firstName}"/></td>
+			<td><form:input path="firstName" type="text" value="${editStaff.firstName}"/></td>
 			<td><form:errors path="firstName" cssStyle="color:red;"></form:errors>
 			</td>
 		</tr>
 		<tr>
 			<td>LastName <spring:message code="staff.lastName" text=""/> :
 			</td>
-			<td><form:input path="lastName" type="text" value="${newStaff.lastName}"/></td>
+			<td><form:input path="lastName" type="text" value="${editStaff.lastName}"/></td>
 			<td><form:errors path="lastName" cssStyle="color:red;"></form:errors>
 			</td>			
 		</tr>
@@ -69,18 +69,10 @@
 			<td>Position <spring:message code="staff.position" text="" />:
 			</td>
 			<td><select name="position">
-					<option value="Manager">Manager
-						<spring:message code="staff.manager" text="" />
-					</option>
-					<option value="Staff" selected>Staff
-						<spring:message code="staff.staff" text="" />
-					</option>
-					<option value="Engineer">Engineer
-						<spring:message code="staff.engineer" text="" />
-					</option>
-					<option value="Accountant">Accountant
-						<spring:message code="staff.accountant" text="" />
-					</option>
+					<option value="Manager"  <c:if test="${editStaff.position=='Manager'}">selected</c:if>>Manager <spring:message code="staff.manager" text="" /></option>
+					<option value="Staff" <c:if test="${editStaff.position=='Staff'}">selected</c:if>>Staff <spring:message code="staff.staff" text="" /></option>
+					<option value="Engineer" <c:if test="${editStaff.position=='Engineer'}">selected</c:if>>Engineer <spring:message code="staff.engineer" text=""/></option>
+					<option value="Accountant" <c:if test="${editStaff.position=='Accountant'}">selected</c:if>>Accountant <spring:message code="staff.accountant" text="" /></option>
 			</select></td>
 		</tr>
 		<tr>
@@ -112,9 +104,9 @@
 	<c:forEach var="staff" items="${stafflist}">
 		<tr>
 			
-			<td>${staff.firstName}</td>
+			<td>${staff.firstName}firstname</td>
 
-			<td>${staff.lastName}</td>
+			<td>${staff.lastName}lastname</td>
 
 			<td>${staff.address.country}</td>
 
@@ -132,7 +124,6 @@
 
 			<td><a href="<spring:url value="/staff/edit/${staff.id}"/>">Edit</a> | <a
 				href="<spring:url value="/staff/delete/${staff.id}"/>">Delete</a></td>
-
 		</tr>
 	</c:forEach>
 </table>

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -29,6 +30,9 @@ public class Credential {
 	private Boolean enabled;
 	@OneToMany(fetch=FetchType.EAGER,mappedBy="credential",cascade=CascadeType.ALL)
 	Set<Authority> roles;
+	@OneToOne(mappedBy="credential")
+	private Member member;
+	
 	
 	public Long getId() {
 		return id;
@@ -73,6 +77,12 @@ public class Credential {
 	}
 	public void setRoles(Set<Authority> roles) {
 		this.roles = roles;
+	}
+	public Member getMember() {
+		return member;
+	}
+	public void setMember(Member member) {
+		this.member = member;
 	}
 	
 	

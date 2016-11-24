@@ -1,5 +1,7 @@
 package org.coop.sidc.serviceimpl;
 
+import java.util.List;
+
 import org.coop.sidc.domain.Member;
 import org.coop.sidc.repositories.MemberRepository;
 import org.coop.sidc.service.MemberService;
@@ -17,6 +19,16 @@ public class MemberServiceImpl implements MemberService{
 	public Member save(Member member) {
 		member=memberRepository.save(member);
 		return member;
+	}
+
+	@Override
+	public Member get(Long id) {
+		return memberRepository.findOne(id);
+	}
+
+	@Override
+	public List<Member> getList() {
+		return (List<Member>) memberRepository.findAll();
 	}
 
 }

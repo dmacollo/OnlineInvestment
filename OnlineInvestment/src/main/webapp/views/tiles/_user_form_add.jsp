@@ -31,7 +31,7 @@
 </form:form>
 <h2>User List</h2>
 
-<table>
+<table class="table">
 	<c:forEach var="user" items="${users}">
 		<tr>
 			<td>${user.username}</td>

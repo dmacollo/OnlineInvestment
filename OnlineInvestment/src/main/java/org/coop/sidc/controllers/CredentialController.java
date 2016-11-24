@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.coop.sidc.domain.Authority;
 import org.coop.sidc.domain.Credential;
+import org.coop.sidc.domain.Member;
 import org.coop.sidc.service.CredentialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @RequestMapping(value="/user")
+@SessionAttributes({"activeUser"})
 public class CredentialController {
 	@Autowired
 	CredentialService credentialService;
@@ -36,8 +39,10 @@ public class CredentialController {
 		}
 		Set<Authority> authorities=new HashSet<Authority>();
 		Authority auth1=new Authority("ROLE_USER");
+		
 		auth1.setCredential(credential);
 		authorities.add(auth1);
+		
 		credential.setEnabled(true);
 		credential.setRoles(authorities);
 		

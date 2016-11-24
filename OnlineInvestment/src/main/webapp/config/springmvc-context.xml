@@ -14,6 +14,7 @@
 	<context:component-scan base-package="org.coop.sidc" />
 	<mvc:annotation-driven/>
 	
+	
 	<!-- START - View Resolvers -->
  	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
@@ -43,7 +44,8 @@
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource"/>
 	</bean>
-	<mvc:resources  location="/resources/"  mapping="/resource/**"/>
+	
+	<mvc:resources  mapping="/resource/**" location="classpath:/resources/,/resources/"/>	
 
 	<!-- For localization -->
 	
